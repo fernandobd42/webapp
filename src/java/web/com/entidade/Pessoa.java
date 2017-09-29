@@ -1,21 +1,24 @@
-package com.web.entidade;
+package com.aula2709.entidade;
 
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 
-@Entity
-public class Produto implements Serializable{
+@MappedSuperclass
+public abstract class Pessoa implements Serializable{
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nome;
-    private double preco;
+    protected Long id;
+    protected String nome;
     
-    public Produto () {
+    @ManyToOne
+    private Cidade cidade;
+    
+    public Pessoa(){
         super();
     }
 
@@ -35,18 +38,18 @@ public class Produto implements Serializable{
         this.nome = nome;
     }
 
-    public double getPreco() {
-        return preco;
+    public Cidade getCidade() {
+        return cidade;
     }
 
-    public void setPreco(double preco) {
-        this.preco = preco;
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 41 * hash + Objects.hashCode(this.id);
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -61,7 +64,7 @@ public class Produto implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Produto other = (Produto) obj;
+        final Pessoa other = (Pessoa) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }

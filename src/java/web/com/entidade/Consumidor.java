@@ -1,4 +1,4 @@
-package com.web.entidade;
+package com.aula2709.entidade;
 
 import java.io.Serializable;
 import java.util.List;
